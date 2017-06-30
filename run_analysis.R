@@ -30,28 +30,6 @@ for(i in 1:6){
 }
 
 
-## Read the Inertial Signals files
-##Reset working directory
-setwd("C:/Users/sunxi/Coursera/Data_Science/3-week4/Project/dataset/train/Inertial Signals")
-body_acc_x_train <- read.table("body_acc_x_train.txt")
-names(body_acc_x_train) <- paste(rep(c("body_acc_x_train_v"), 128), 1:128)
-body_acc_y_train <- read.table("body_acc_y_train.txt")
-names(body_acc_y_train) <- paste(rep(c("body_acc_y_train_v"), 128), 1:128)
-body_acc_z_train <- read.table("body_acc_z_train.txt")
-names(body_acc_z_train) <- paste(rep(c("body_acc_z_train_v"), 128), 1:128)
-body_gyro_x_train <- read.table("body_gyro_x_train.txt")
-names(body_gyro_x_train) <- paste(rep(c("body_gyro_x_train"), 128), 1:128)
-body_gyro_y_train <- read.table("body_gyro_y_train.txt")
-names(body_gyro_y_train) <- paste(rep(c("body_gyro_y_train"), 128), 1:128)
-body_gyro_z_train <- read.table("body_gyro_z_train.txt")
-names(body_gyro_z_train) <- paste(rep(c("body_gyro_z_train"), 128), 1:128)
-total_acc_x_train <- read.table("total_acc_x_train.txt")
-names(total_acc_x_train) <- paste(rep(c("total_acc_x_train"), 128), 1:128)
-total_acc_y_train <- read.table("total_acc_y_train.txt")
-names(total_acc_y_train) <- paste(rep(c("total_acc_y_train"), 128), 1:128)
-total_acc_z_train <- read.table("total_acc_z_train.txt")
-names(total_acc_z_train) <- paste(rep(c("total_acc_z_train"), 128), 1:128)
-
 ##combine the Inertial Signals files
 index_train_inter_Sig <- dir(path = "C:/Users/sunxi/Coursera/Data_Science/3-week4/Project/dataset/train/Inertial Signals", pattern = ".txt")
 index_train_inter_Sig <- gsub(".txt", "", index_train_inter_Sig)
@@ -76,28 +54,6 @@ for(i in 1:6){
 }
 
 
-## Read the Inertial Signals files
-##Reset working directory
-setwd("C:/Users/sunxi/Coursera/Data_Science/3-week4/Project/dataset/test/Inertial Signals")
-body_acc_x_test <- read.table("body_acc_x_test.txt")
-names(body_acc_x_test) <- paste(rep(c("body_acc_x_test_v"), 128), 1:128)
-body_acc_y_test <- read.table("body_acc_y_test.txt")
-names(body_acc_y_test) <- paste(rep(c("body_acc_y_test_v"), 128), 1:128)
-body_acc_z_test <- read.table("body_acc_z_test.txt")
-names(body_acc_z_test) <- paste(rep(c("body_acc_z_test_v"), 128), 1:128)
-body_gyro_x_test <- read.table("body_gyro_x_test.txt")
-names(body_gyro_x_test) <- paste(rep(c("body_gyro_x_test"), 128), 1:128)
-body_gyro_y_test <- read.table("body_gyro_y_test.txt")
-names(body_gyro_y_test) <- paste(rep(c("body_gyro_y_test"), 128), 1:128)
-body_gyro_z_test <- read.table("body_gyro_z_test.txt")
-names(body_gyro_z_test) <- paste(rep(c("body_gyro_z_test"), 128), 1:128)
-total_acc_x_test <- read.table("total_acc_x_test.txt")
-names(total_acc_x_test) <- paste(rep(c("total_acc_x_test"), 128), 1:128)
-total_acc_y_test <- read.table("total_acc_y_test.txt")
-names(total_acc_y_test) <- paste(rep(c("total_acc_y_test"), 128), 1:128)
-total_acc_z_test <- read.table("total_acc_z_test.txt")
-names(total_acc_z_test) <- paste(rep(c("total_acc_z_test"), 128), 1:128)
-
 ##combine the Inertial Signals files
 index_test_inter_Sig <- dir(path = "C:/Users/sunxi/Coursera/Data_Science/3-week4/Project/dataset/test/Inertial Signals", pattern = ".txt")
 index_test_inter_Sig <- gsub(".txt", "", index_test_inter_Sig)
@@ -117,3 +73,7 @@ train_test_select <- train_test[,grep("subject|label|mean|std", names(train_test
 
 ## creates a second, independent tidy data set with the average of each variable for each activity and each subject.
 train_test_select_group <- train_test_select %>% group_by(subject, label) %>% summarise_all(funs(mean))
+
+
+##Output the required data.frame.
+write.table(train_test_select_group, file = "C:/Users/sunxi/Coursera/Data_Science/3-week4/Project/train_test_select_group.txt", row.names = FALSE)
